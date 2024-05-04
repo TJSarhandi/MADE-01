@@ -44,14 +44,13 @@ pipeline TreesPipeline {
 
     }
 
-    constraint TreesUnitString oftype AllowlistConstraint {
-        allowlist: ["Furth-Mitte"];
-    }
+    constraint stadtteilConstraint oftype AllowlistConstraint {
+    allowlist: [ "Furth-Nord", "Furth-Mitte", "Furth-Süd"];}
 
     
    valuetype stadt oftype text {
         constraints: [
-            TreesUnitString,
+            stadtteilConstraint,
         ];
     } 
 
