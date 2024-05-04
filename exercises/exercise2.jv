@@ -23,7 +23,7 @@ pipeline TreesPipeline {
     TreesExtractor
         ->TreesTextFileInterpreter
         ->TreesCSVInterpreter
-       // ->TreesColumnDeleter
+        ->TreesColumnDeleter
         ->TreesTableInterpreter
         ->TreesLoader;
 
@@ -41,11 +41,11 @@ pipeline TreesPipeline {
 
     }
 
-     //block TreesColumnDeleter oftype ColumnDeleter {
+     block TreesColumnDeleter oftype ColumnDeleter {
     
-       // delete: [column E];
+        delete: [column E];
 
-     //}
+     }
 
       constraint StatdtielConstraint oftype RegexConstraint {
         regex: /^Furth-.*/;
@@ -70,7 +70,7 @@ pipeline TreesPipeline {
 
         header: true;
         columns: [
-            "lfd. Nummer" oftype integer,
+            "lfd_nr" oftype integer,
             "stadtteil" oftype stadt,
             "standort" oftype text,
             "baumart_botanisch" oftype text,
