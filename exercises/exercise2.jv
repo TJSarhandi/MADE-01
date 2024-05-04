@@ -44,15 +44,10 @@ pipeline TreesPipeline {
 
     }
 
-    constraint stadtteilConstraint oftype AllowlistConstraint {
-    allowlist: [ "Furth-Nord", "Furth-Mitte", "Furth-Süd"];}
-
-    
-   valuetype stadt oftype text {
-        constraints: [
-            stadtteilConstraint,
-        ];
-    } 
+     constraint IPv4Format oftype RegexConstraint {
+        regex: /^Furth-$/;
+   
+    }
 
     block TreesLoader oftype SQLiteLoader {
 
