@@ -56,12 +56,12 @@ Each work package contains at least one issue.
 4. **Tests** [WP4](https://github.com/TJSarhandi/MADE-01/milestone/4)
     1. Create Tests for each module [issue](https://github.com/TJSarhandi/MADE-01/issues/14)
 5. **Continuous integration** [WP5](https://github.com/TJSarhandi/MADE-01/milestone/5)
-1.	Develop CI for Tests [issue](https://github.com/TJSarhandi/MADE-01/issues/15)
-2.	Set Up CI for Pre-Commit [issue](https://github.com/TJSarhandi/MADE-01/issues/16)
+    1.	Develop CI for Tests [issue](https://github.com/TJSarhandi/MADE-01/issues/15)
+    2.	Set Up CI for Pre-Commit [issue](https://github.com/TJSarhandi/MADE-01/issues/16)
 6. **Presenting Findings** [WP6](https://github.com/TJSarhandi/MADE-01/milestone/6)
-1.	Develop visual representations [issue](https://github.com/TJSarhandi/MADE-01/issues/17)
-2. Improve the Repository's Presentation [issue](https://github.com/TJSarhandi/MADE-01/issues/18)
-3. Prepare the Final Presentation [issue](https://github.com/TJSarhandi/MADE-01/issues/19)
+    1.	Develop visual representations [issue](https://github.com/TJSarhandi/MADE-01/issues/17)
+    2. Improve the Repository's Presentation [issue](https://github.com/TJSarhandi/MADE-01/issues/18)
+    3. Prepare the Final Presentation [issue](https://github.com/TJSarhandi/MADE-01/issues/19)
 
 
 Work packages must be completed sequentially as each one depends on the completion of all preceding ones. Dependencies within a work package are specified in the corresponding issues.
