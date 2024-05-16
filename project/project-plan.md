@@ -69,5 +69,7 @@ Since issues can change, the issue-ID should not be used to identify dependencie
 
 ## References and footnotes
 
-[^r1]: Severe Weather Data Inventory (SWDI) - Catalog
-[^r2]: Integrated Surface Dataset (Global) - Catalog
+[^r1]: [https://catalog.data.gov](https://catalog.data.gov/dataset/integrated-surface-dataset-global1)
+[^r2]: [https://catalog.data.gov](https://catalog.data.gov/dataset/severe-weather-data-inventory-swdi2)
+
+
