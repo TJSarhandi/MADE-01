@@ -5,9 +5,9 @@ pipeline BatteryTempPipeline
         ->BatteryTempDataPicker
         ->BatteryTempTextInterpreter
         ->BatteryTempCSVInterpreter
-        ->BatteryTempColDataSelector
-        ->BatteryTempColDeleter
-        ->BatteryTempTableDataInterpreter
+        ->ColDataSelector
+        ->ColDeleter
+        ->TableDataInterpreter
         ->BatteryTempTransformerA
         ->BatteryTempTransformerB
         ->BatteryTempLoader;
@@ -19,11 +19,11 @@ pipeline BatteryTempPipeline
     block BatteryTempTextInterpreter oftype TextFileInterpreter {}
     block BatteryTempCSVInterpreter oftype CSVInterpreter {delimiter: ";"; }
 
-    block BatteryTempColDeleter oftype ColumnDeleter { 
+    block ColDeleter oftype ColumnDeleter { 
         delete: [column F, column G, column H, column I]; 
     }
 
-    block BatteryTempColDataSelector oftype CellRangeSelector {
+    block ColDataSelector oftype CellRangeSelector {
         select: range A1:K*;
     }
 
@@ -36,7 +36,7 @@ pipeline BatteryTempPipeline
         constraints: [ Valididconstraint ];
     } 
 
-    block BatteryTempTableDataInterpreter oftype TableInterpreter {
+    block TableDataInterpreter oftype TableInterpreter {
         header: false;
         columns: [
             "id" oftype Valididtype, "producer" oftype text, "model" oftype text, "month" oftype integer,
