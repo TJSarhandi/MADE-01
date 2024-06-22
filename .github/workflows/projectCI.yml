@@ -1,0 +1,46 @@
+name: Project CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - project/**
+      - tests/**
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Make pipeline.sh executable
+        run: |
+          chmod +x project/pipeline.sh
+
+      - name: Run Shell pipeline script
+        working-directory: project
+        run: |
+          ./pipeline.sh
+
+      - name: Verify downloaded files
+        run: |
+          echo "Files in data directory:"
+          ls -1 data
+
+      - name: Run tests
+        run: |
+          pytest -s
