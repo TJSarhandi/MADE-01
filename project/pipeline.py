@@ -40,32 +40,60 @@ if dataframe1 is not None:
     save_path = os.path.join(data_dir, 'disasterFrequency.csv')
     save_dataframe_to_csv(dataframe1, save_path)
 
+import os
+import pandas as pd
+
+import os
+import pandas as pd
+
+import os
+import pandas as pd
+
 def merge_csv_files(file1, file2, drop_columns, save_path, output_filename):
     try:
+
         df1 = pd.read_csv(file1)
         df2 = pd.read_csv(file2)
-        
-        df1 = df1.drop(columns=drop_columns, errors='ignore')
-        df2 = df2.drop(columns=drop_columns, errors='ignore')
-        
-        merged_df = pd.concat([df1, df2], ignore_index=True)
-        
+ 
+        df1 = df1.drop(columns=[col for col in drop_columns if col not in ['Country', 'ISO3', 'Indicator']], errors='ignore')
+        df2 = df2.drop(columns=[col for col in drop_columns if col not in ['Country', 'ISO3', 'Indicator']], errors='ignore')
+
+        columns_to_drop = [f'F{year}' for year in range(1961, 1980)]
+        df2 = df2.drop(columns=columns_to_drop, errors='ignore')
+
+        start_year = 1980
+        end_year = 2022
+        temperature_columns = [f'F{year}' for year in range(start_year, end_year + 1)]
+        disaster_columns = [f'F{year}' for year in range(start_year, end_year + 1)]
+
+        df2 = df2[['Country', 'ISO3', 'Indicator'] + temperature_columns]
+        df1 = df1[['Country', 'ISO3', 'Indicator'] + disaster_columns]
+
+        common_countries = set(df2['Country']).intersection(set(df1['Country']))
+        df2 = df2[df2['Country'].isin(common_countries)]
+        df1 = df1[df1['Country'].isin(common_countries)]
+
+        numeric_columns = df1.select_dtypes(include=[float, int]).columns.tolist()
+        df1_aggregated = df1.groupby('Country')[numeric_columns].mean().reset_index()
+
+        merged_df = pd.merge(df2, df1_aggregated, on='Country', suffixes=('_temp', '_disaster'))
+
         os.makedirs(save_path, exist_ok=True)
-        
         output_file = os.path.join(save_path, output_filename)
-        
         merged_df.to_csv(output_file, index=False)
+
         print(f"Data successfully merged and saved to {output_file}")
     except Exception as e:
         print(f"An error occurred: {e}")
 
 file1 = os.path.join(data_dir, 'disasterFrequency.csv')
 file2 = os.path.join(data_dir, 'surfaceTemperature.csv')
-drop_columns = ['ObjectId', 'Country', 'ISO2', 'ISO3', 'Indicator', 'Unit', 'Source', 'CTS_Code', 'CTS_Name', 'CTS_Full_Descriptor']
+drop_columns = ['ObjectId', 'ISO2', 'Unit', 'Source', 'CTS_Code', 'CTS_Name', 'CTS_Full_Descriptor']
 save_path = data_dir
 output_filename = 'mergedCSV.csv'
 
 merge_csv_files(file1, file2, drop_columns, save_path, output_filename)
+
 
 import sqlite3
 
